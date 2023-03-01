@@ -72,7 +72,7 @@ public class leantechtest {
 
 	  
 
-	        // Add a product to the cart 
+	        // Add a product to the cart, it was a backpack. 
 
 	        WebElement addToCartButton = driver.findElement(By.xpath("//button[text()='Add to cart']")); 
 
@@ -120,9 +120,9 @@ public class leantechtest {
 
 	        WebElement continueButton = driver.findElement(By.xpath("//input[@value='Continue']")); 
 
-	        firstName.sendKeys("John"); 
+	        firstName.sendKeys("Juan"); 
 
-	        lastName.sendKeys("Doe"); 
+	        lastName.sendKeys("Perez"); 
 
 	        zipCode.sendKeys("12345"); 
 
@@ -155,7 +155,16 @@ public class leantechtest {
 	        String completeHeaderText = completeHeader.getText(); 
 
 	        Assertions.assertEquals("THANK YOU FOR YOUR ORDER", completeHeaderText); 
+	        
+	        
+	        // Validate completion Pony Express logo
 
+	        WebDriverWait wait = new WebDriverWait(driver, 10);
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#contenedor")));
+
+	        List<WebElement> imagenes = driver.findElements(By.xpath("//*[@id=\"checkout_complete_container\"]/img "));
+	        for (WebElement image : images) {
+	            assertTrue(image.isDisplayed(), "Pony Express displayed correctly: " + image.getAttribute("src"));
 	    } 
 
 	} 
